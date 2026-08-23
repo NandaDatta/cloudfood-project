@@ -59,6 +59,8 @@ app.get('/test', (req, res) => {
 app.listen(PORT, async () => {
   console.log(`🚀 Server running on port ${PORT}`);
   console.log(`📡 Health check: http://localhost:${PORT}`);
+  console.log('✅ Server is running with NEW CODE! 🚀');
+
   
   // Test DB connection on startup
   await connectDB();
