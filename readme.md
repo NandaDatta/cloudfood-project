@@ -22,3 +22,7 @@ curl http://localhost:5000
 
 # Test payment service
 curl http://localhost:5001
+
+echo "" >> README.md
+echo "## Deployment Status" >> README.md
+echo "[![CI/CD](https://github.com/yourusername/cloudfood-project/actions/workflows/deploy.yml/badge.svg)](https://github.com/yourusername/cloudfood-project/actions/workflows/deploy.yml)" >> README.md
