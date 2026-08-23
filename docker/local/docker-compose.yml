@@ -1,0 +1,54 @@
+services:
+  # MySQL Database
+  db:
+    image: mysql:8.0
+    container_name: test_db
+    restart: always
+    environment:
+      MySQL_ROOT_PASSWORD: password
+      MySQL_DATABASE: testdb
+      MySQL_USER: appuser
+      MySQL_PASSWORD: apppassword
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-password"]
+      timeout: 10s
+      retries: 5
+  
+  # Order Service
+  order-service:
+    build:
+      context: ../../app/order-service
+      dockerfile: Dockerfile
+    container_name: order_service
+    environment:
+      DB_HOST: db
+      DB_USER: root
+      DB_PASS: password
+      DB_NAME: testdb
+      DB_PORT: 3306
+      NODE_ENV: development
+    ports:
+      - "5000:5000"
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: always
+
+  # Payment Service
+  payment-service:
+    build: 
+      context: ../../app/payment-service
+      dockerfile: Dockerfile
+    container_name: payment-service
+    environment:
+      NODE_ENV: development
+    ports:
+      - "5001:5001"
+    restart: always
+
+volumes:
+  mysql_data:
