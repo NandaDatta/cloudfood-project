@@ -8,8 +8,8 @@ on:
 
 env:
   AWS_REGION: us-east-1
-  ECR_REPOSITORY: cloudfood-order-service
-  ECS_CLUSTER: cloudfood-cluster
+  ECR_REPOSITORY: dev-order_service
+  ECS_CLUSTER: dev-cluster
   ECS_SERVICE: order-service
   ECS_TASK_DEFINITION: order-service
 
