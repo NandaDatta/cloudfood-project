@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 env:
-  AWS_REGION: ap-south-1
+  AWS_REGION: us-east-1
   ECR_REPOSITORY: cloudfood-order-service
   ECS_CLUSTER: cloudfood-cluster
   ECS_SERVICE: order-service
