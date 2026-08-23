@@ -1,4 +1,4 @@
-# ECS Cluster 
+# ECS Cluster
 resource "aws_ecs_cluster" "main" {
   name = "${var.project_name}-cluster"
 
@@ -87,7 +87,7 @@ resource "aws_ecs_task_definition" "order_service" {
   }
 }
 
-# ECS Service
+# ECS Service - UPDATED to use PUBLIC subnets
 resource "aws_ecs_service" "order_service" {
   name            = "order-service"
   cluster         = aws_ecs_cluster.main.id
@@ -96,9 +96,9 @@ resource "aws_ecs_service" "order_service" {
   launch_type     = "FARGATE"
 
   network_configuration {
-    subnets          = aws_subnet.private[*].id
+    subnets          = aws_subnet.public[*].id  # CHANGED: public subnets
     security_groups  = [aws_security_group.ecs.id]
-    assign_public_ip = false
+    assign_public_ip = true  # CHANGED: true
   }
 
   load_balancer {
