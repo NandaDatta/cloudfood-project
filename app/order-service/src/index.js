@@ -43,7 +43,8 @@ app.get('/', async (req, res) => {
     },
     message: isDBConnected 
       ? '✅ Server is running and DB is connected!' 
-      : '⚠️ Server is running but DB connection failed!'
+      : '⚠️ Server is running but DB connection failed!',
+    newMessage: "Server is running with NEW CODE! "
   });
 });
 
@@ -51,7 +52,7 @@ app.get('/', async (req, res) => {
 app.get('/test', (req, res) => {
   res.json({
     message: 'Express server is working!',
-    env: process.env.NODE_ENV || 'development'
+    env: process.env.NODE_ENV || 'development',
   });
 });
 
